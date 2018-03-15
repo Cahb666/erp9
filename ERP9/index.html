@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<!--<html lang="en" manifest="cache.appcache">-->
+<html lang="en">
+<head>
+  <title>ERP</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- CSS Bootsrap sin conexion
+  <link rel="stylesheet" href="cssjssinconexion/bootstrap.min.css">
+  <script src="cssjssinconexion/jquery.min.js"></script>
+  <script src="cssjssinconexion/bootstrap.min.js"></script>
+-->
+ 
+
+  
+
+
+  <link rel="stylesheet" href="css.css">
+
+  <script src="js/BaseException.js"></script>
+  <script src="js/Objects.js"></script>
+  <script src="js/ERP.js"></script>
+  <script src="js/forma.js"></script>
+  <script src="js/XHR.js"></script>
+  
+
+  <script>
+  //menu fijo al bajar con el scroll
+  $(document).ready(function(){
+    var altura = $('.menu').offset().top;
+      
+    $(window).on('scroll', function(){
+      if ( $(window).scrollTop() > altura ){
+        $('.menu').addClass('navbar-fixed-top');
+        document.getElementById("myDiv").style.marginTop = "100px"; 
+      } else {
+        $('.menu').removeClass('navbar-fixed-top');
+        document.getElementById("myDiv").style.marginTop = "0px"; 
+     
+      }
+    });
+     
+  });
+  </script>
+
+
+<style>
+    .modal-header, h4, .close {
+        background-color: #337ab7;
+        color:white !important;
+        text-align: center;
+        font-size: 30px;
+    }
+    </style>
+</head>
+
+
+
+
+
+
+<body id="init">
+<!--HEADER-->
+<div class="jumbotron">
+  <div class="container text-center">
+    <h1>ERP</h1>      
+    <p>Enterprise Resource Planning</p>
+  </div>
+</div>
+
+
+
+
+
+
+<!--MENU-->
+<nav class="navbar navbar-inverse menu ">
+
+  <div class="container"> 
+    
+    <div class="navbar-header"> <!--MENU MOVIL-->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <!--Relacion al menu myNavbar-->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="">ERP Logo</a>
+    </div>  <!--FIN MENU MOVIL-->
+    
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="">Inicio</a></li>
+        
+        <!--TIENDAS-->
+        <li class="dropdown tienda-nav">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="">Tiendas<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+          </ul>
+        </li>
+
+       
+
+        <!--CATEGORIAS-->
+        <li class="dropdown categorias-nav hidden">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="">Categorias<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            
+          </ul>
+        </li>
+
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <!--
+        <li id="eliminarDD" class=""><a href="#" onclick="cerrarV()"><span class="glyphicon glyphicon-trash"></span> Eliminar D&D</a></li>
+        <li id="mapas" class=""><a href="#" onclick="cerrarV()"><span class="glyphicon glyphicon-map-marker"></span> Ubicacion</a></li>
+          -->
+        <li><a href="#" onclick="cerrarV()"><span class="glyphicon glyphicon-remove"></span> Cerrar Ventanas</a></li>
+        <li id="grabarJson" class="hidden"><a href="#" onclick="registroJSON()"><span class="glyphicon glyphicon-save-file"></span> Grabar JSON</a></li>
+
+        <li class="dropdown categorias-nav">
+          <a class="dropdown-toggle" data-toggle="dropdown" href=""><span class="glyphicon glyphicon-user"></span> Sesion<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" id="aU">Usuario</a>
+            </li>
+            <li>
+              <a href="#" id="aT" class="hidden">Tiendas</a>
+            </li>
+            <li>
+              <a href="#" id="aC" class="hidden">Categorias</a>
+            </li>
+            <li>
+              <a href="#" id="aP" class="hidden">Productos</a>
+            </li>
+            <li>
+              <a href="#" id="aG" class="hidden">Gestiones</a>
+            </li>
+          </ul>
+        </li>
+
+        <li id="cerrarSesion" class="hidden"><a href="#" onclick="cerrarS()"><span class="glyphicon glyphicon-remove"></span> Cerrar Sesion</a></li>
+       <!-- <li><a href=""><span class="glyphicon glyphicon-shopping-cart"></span> Carrito</a></li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<!-- Modal U-->
+  <div class="modal fade" id="modalU" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-lock"></span> Usuario</h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+            <form role="form">
+              <div class="form-group">
+                <label for="usuario"><span class="glyphicon glyphicon-user"></span> Nombre</label>
+                <input type="text" name="usuario" class="form-control" id="usuario">
+              </div>
+              <div class="form-group">
+                <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Contraseña</label>
+                <input type="password" name="psw" class="form-control" id="psw">
+              </div>
+              
+                <button type="button" id="bU" class="btn btn-info btn-block" onclick="sesionUsuario()"><span class="glyphicon glyphicon-off"></span> Login</button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+
+
+<!-- Modal T-->
+  <div class="modal fade" id="modalT" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-shopping-cart"></span> Tiendas</h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+            <form role="form">
+              <div class="form-group">
+                <label for="cif"><span class="glyphicon glyphicon-asterisk"></span> CIF</label>
+                <input type="text" class="form-control" name="cif" id="cif">
+              </div>
+              <div class="form-group">
+                <label for="tienda"><span class="glyphicon glyphicon-shopping-cart"></span> Tienda</label>
+                <input type="text" class="form-control" name="tienda" id="tienda">
+              </div>
+              <div class="form-group">
+                <label for="direccion"><span class="glyphicon glyphicon-home"></span> Direccion</label>
+                <input type="text" class="form-control" name="direccion" id="direccion">
+              </div>
+              <div class="form-group">
+                <label for="tlf"><span class="glyphicon glyphicon-phone"></span> Telefono</label>
+                <input type="text" class="form-control" name="tlf" id="tlf">
+              </div>
+              
+                <button type="button" id="baT" class="btn btn-success btn-block" onclick="crearModificarTienda()"><span class="glyphicon glyphicon-plus"></span> Añadir / <span class="glyphicon glyphicon-flash"></span> Modidicar</button>
+                <button type="button" id="beT" class="btn btn-danger btn-block" onclick="eliminarTienda()"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+
+<!-- Modal C-->
+    <div class="modal fade" id="modalC" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4><span class="glyphicon glyphicon-th"></span> Categorias</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+              <form role="form">
+                <div class="form-group">
+                  <label for="categoria"><span class="glyphicon glyphicon-th-large"></span> Categoria</label>
+                  <input type="text" class="form-control" name="categoria" id="categoria">
+                </div>
+                <div class="form-group">
+                  <label for="descripcion"><span class="glyphicon glyphicon-pencil"></span> Descripcion</label>
+                  <input type="text" class="form-control" name="descripcion" id="descripcion">
+                </div>
+             
+                  <button type="button" id="baC" class="btn btn-success btn-block" onclick="crearModificarCategoria()"><span class="glyphicon glyphicon-plus" ></span> Añadir / <span class="glyphicon glyphicon-flash"></span> Modidicar</button>
+                  <button type="button" id="beC" class="btn btn-danger btn-block" onclick="eliminarCategoria()"><span class="glyphicon glyphicon-minus" ></span> Eliminar</button>
+                 
+              </form>
+            </div>
+          </div>
+          
+        </div>
+      </div> 
+
+
+<!-- Modal P-->
+  <div class="modal fade" id="modalP" role="dialog">
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-briefcase"></span> Productos</h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+            <form role="form">
+              <div class="form-group">
+                  <label for="tipo"><span class="glyphicon glyphicon-tags"></span> Tipo</label>
+                  <select id="tipo" class="form-control" name="tipo">
+                      <option value="TV" selected>TV</option>
+                      <option value="PC">PC</option>
+                      <option value="SP">SP</option>
+                     
+                  </select>
+
+
+
+                 
+              </div>
+              <div class="form-group">
+                  <label for="sn"><span class="glyphicon glyphicon-barcode"></span> SN</label>
+                  <input type="text" class="form-control" name="sn" id="sn">
+              </div>
+              <div class="form-group">
+                <label for="producto"><span class="glyphicon glyphicon-briefcase"></span> Producto</label>
+                <input type="text" class="form-control" name="producto" id="producto">
+              </div>
+              <div class="form-group">
+                <label for="precio"><span class="glyphicon glyphicon-euro"></span> Precio</label>
+                <input type="text" class="form-control" name="precio" id="precio">
+              </div>
+
+              <div class="form-group">
+                <label for="tax"><span class="glyphicon glyphicon-piggy-bank"></span> Tax</label>
+                <input type="text" class="form-control" name="tax" id="tax">
+              </div>
+          
+                <button type="button" id="baP" class="btn btn-success btn-block"  onclick="crearModificarProducto()"><span class="glyphicon glyphicon-plus"></span> Añadir / <span class="glyphicon glyphicon-flash"></span> Modidicar</button>
+                <button type="button" id="beP" class="btn btn-danger btn-block"  onclick="eliminarProducto()"><span class="glyphicon glyphicon-minus"></span> Eliminar</button>
+              
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+
+    <!-- Modal G-->
+  <div class="modal fade" id="modalG" role="dialog">
+      <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header" style="padding:35px 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4><span class="glyphicon glyphicon-th"></span> Categoria <span class="glyphicon glyphicon-briefcase"></span> Producto</h4>
+              </div>
+              <div class="modal-body" style="padding:40px 50px;">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="categoria2"><span class="glyphicon glyphicon-th-large"></span> Categoria</label>
+                    <input type="text" class="form-control" name="categoria2" id="categoria2">
+                  </div>
+                  <div class="form-group">
+                      <label for="sn2"><span class="glyphicon glyphicon-barcode"></span> SN Producto</label>
+                      <input type="text" class="form-control"  name="sn2" id="sn2">
+                  </div>
+                  
+              
+                    <button type="button" id="baCP" class="btn btn-success btn-block" onclick="anadirCategoriaProducto()"><span class="glyphicon glyphicon-plus"></span> Añadir Categoria a Producto</button>
+                    
+                  
+                </form>
+              </div>
+            </div>
+            
+          </div>
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-briefcase"></span> Producto <span class="glyphicon glyphicon-shopping-cart"></span> Tienda</h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+            <form role="form">
+              
+              <div class="form-group">
+                  <label for="sn3"><span class="glyphicon glyphicon-barcode"></span> SN Poducto</label>
+                  <input type="text" class="form-control"  name="sn3" id="sn3">
+              </div>
+
+              <div class="form-group">
+                  <label for="unidades"><span class="glyphicon glyphicon-plus"></span> Unidades</label>
+                  <input type="text" class="form-control"  name="unidades" id="unidades">
+              </div>
+
+              <div class="form-group">
+                  <label for="cif2"><span class="glyphicon glyphicon-asterisk"></span> CIF Tienda</label>
+                  <input type="text" class="form-control"  name="cif2" id="cif2">
+                </div>
+              
+          
+                <button type="button" id="baPT" class="btn btn-success btn-block"  onclick="anadirProductoTienda()" ><span class="glyphicon glyphicon-plus"></span> Añadir Producto a Tienda</button>
+              
+            </form>
+          </div>
+        </div>
+        
+      </div>
+    </div> 
+  
+
+    <script>
+      $(document).ready(function(){
+        
+        $("#aU").click(function(){    //Usuario
+          $("#modalU").modal();
+        });
+
+        $("#aT").click(function(){    //Tienda
+          $("#modalT").modal();
+        });
+
+        $("#aC").click(function(){    //Categoria
+          $("#modalC").modal();
+        });
+
+        $("#aP").click(function(){    //Producto
+          $("#modalP").modal();
+        });
+
+        $("#aG").click(function(){    //Gestiones
+          $("#modalG").modal();
+        });
+
+      });
+    </script>
+ 
+
+
+
+
+
+
+
+<!--CONTAINER-->
+<div class="container" id="myDiv">    
+ 
+
+
+
+
+
+
+
+
+</div><br>
+
+
+</div><br><br>
+
+
+
+
+
+
+
+
+<!--FOOTER-->
+<footer class="container-fluid text-center"> 
+  <form class="form-inline">Obtener Ofertas:
+    <input type="email" class="form-control" size="50" placeholder="Direccion de Correo">
+    <button type="button" class="btn btn-success">Registrarte</button>
+  </form>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+{
+	"categories": [
+		{
+			"category":
+			{
+				"name": "Televisores",
+				"description": "TV"
+			}
+		},
+		{
+			"category":
+			{
+				"name": "Ordenadores",
+				"description": "PC"
+			}
+		},
+		{
+			"category":
+			{
+				"name": "SmartPhone",
+				"description": "SP"
+			}
+		},
+		{
+			"category":
+			{
+				"name": "En Oferta",
+				"description": "OF"
+			}
+		}
+
+	],
+	"product":[
+		{
+			"product":
+			{
+				"SN": "lg49p21",
+				"name": "TV LG 49",
+				"price": "499",
+				"tax": "21",
+				"images": "images/tv1-49.jpg"
+			},
+			"category":[
+				{
+					"category":
+					{
+						"name": "Televisores",
+						"description": "TV"
+					}
+				}
+			]
+		},
+		{
+			"product":
+			{
+				"SN": "lg32p21",
+				"name": "TV LG 32p",
+				"price": "209",
+				"tax": "21",
+				"images": "images/tv2-32.jpg"
+			},
+			"category":[
+				{
+					"category":
+					{
+						"name": "Televisores",
+						"description": "TV"
+					}
+				},
+				{
+					"category":
+					{
+						"name": "En Oferta",
+						"description": "OF"
+					}
+				}
+
+			]
+		},
+		{
+			"product":
+			{
+				"SN": "a107016",
+				"name": "ASUS BLACK-G 1070 16G",
+				"price": "789",
+				"tax": "21",
+				"images": "images/pc1.jpg"
+			},
+			"category":[
+				{
+					"category":
+					{
+						"name": "Ordenadores",
+						"description": "PC"
+					}
+				},
+				{
+					"category":
+					{
+						"name": "En Oferta",
+						"description": "OF"
+					}
+				}
+
+			]
+		},
+		{
+			"product":
+			{
+				"SN": "ix133321",
+				"name": "IPHONE X",
+				"price": "1333",
+				"tax": "21",
+				"images": "images/sp4.jpg"
+			},
+			"category":[
+				{
+					"category":
+					{
+						"name": "SmartPhone",
+						"description": "SP"
+					}
+				}
+
+			]
+		}
+
+	],
+	"shop":[
+		{
+			"shop":
+			{
+				"cif": "A12345678",
+				"name": "Tienda 1",
+				"direccion": "C/Falsa Nº123",
+				"tlf": "963852741"
+			},
+			"product":[
+				{
+					"product":
+					{
+						"SN": "lg49p21",
+						"name": "TV LG 49",
+						"price": "499",
+						"tax": "21",
+						"images": "images/tv1-49.jpg"
+					},
+					"category":[
+						{
+							"category":
+							{
+								"name": "Televisores",
+								"description": "TV"
+							}
+						}
+					]
+				},
+				{
+					"product":
+					{
+						"SN": "lg32p21",
+						"name": "TV LG 32p",
+						"price": "209",
+						"tax": "21",
+						"images": "images/tv2-32.jpg"
+					},
+					"category":[
+						{
+							"category":
+							{
+								"name": "Televisores",
+								"description": "TV"
+							}
+						},
+						{
+							"category":
+							{
+								"name": "En Oferta",
+								"description": "OF"
+							}
+						}
+		
+					]
+				}
+				
+			],
+			"stock": [
+				"10", "5"
+			]
+		},
+		{
+			"shop":
+			{
+				"cif": "B12345678",
+				"name": "Tienda 2",
+				"direccion": "C/Arriba Nº24",
+				"tlf": "963852742"
+			},
+			"product":[
+				{
+					"product":
+					{
+						"SN": "lg32p21",
+						"name": "TV LG 32p",
+						"price": "209",
+						"tax": "21",
+						"images": "images/tv2-32.jpg"
+					},
+					"category":[
+						{
+							"category":
+							{
+								"name": "Televisores",
+								"description": "TV"
+							}
+						},
+						{
+							"category":
+							{
+								"name": "En Oferta",
+								"description": "OF"
+							}
+						}
+		
+					]
+				},
+				{
+					"product":
+					{
+						"SN": "a107016",
+						"name": "ASUS BLACK-G 1070 16G",
+						"price": "789",
+						"tax": "21",
+						"images": "images/pc1.jpg"
+					},
+					"category":[
+						{
+							"category":
+							{
+								"name": "Ordenadores",
+								"description": "PC"
+							}
+						},
+						{
+							"category":
+							{
+								"name": "En Oferta",
+								"description": "OF"
+							}
+						}
+		
+					]
+				},
+				{
+					"product":
+					{
+						"SN": "ix133321",
+						"name": "IPHONE X",
+						"price": "1333",
+						"tax": "21",
+						"images": "images/sp4.jpg"
+					},
+					"category":[
+						{
+							"category":
+							{
+								"name": "SmartPhone",
+								"description": "SP"
+							}
+						}
+		
+					]
+				}
+				
+				
+			],
+			"stock": [
+				"5", "6", "9"
+			]
+		}
+
+
+
+	]
+}
